@@ -11,9 +11,18 @@
     </head>
     <body>
         <div class="container">
-              
+            <h1>Notice Board Application</h1>
+           
+            <a href="{{ path('fos_user_security_login')}}" class="btn btn-primary btn" role="button">Login</a>
+            <a href="{{ path('fos_user_registration_register')}}" class="btn btn-success btn" role="button">Registration</a>
+            <a href="{{ path('notice_new')}}" class="btn btn-warning btn" role="button">Add notice</a>
+            <a href="{{ path('notice')}}" class="btn btn-warning btn" role="button">Show all notices</a>
 
-            {% block body %}{% endblock %}
+            {% block body %}
+                
+
+                
+            {% endblock %}
          
         
     </div>
