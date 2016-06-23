@@ -90,4 +90,44 @@ class Category
     {
         return $this->notice;
     }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->notices = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add notices
+     *
+     * @param \AppBundle\Entity\Notice $notices
+     * @return Category
+     */
+    public function addNotice(\AppBundle\Entity\Notice $notices)
+    {
+        $this->notices[] = $notices;
+
+        return $this;
+    }
+
+    /**
+     * Remove notices
+     *
+     * @param \AppBundle\Entity\Notice $notices
+     */
+    public function removeNotice(\AppBundle\Entity\Notice $notices)
+    {
+        $this->notices->removeElement($notices);
+    }
+
+    /**
+     * Get notices
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getNotices()
+    {
+        return $this->notices;
+    }
 }

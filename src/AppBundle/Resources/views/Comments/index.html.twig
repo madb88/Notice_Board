@@ -1,0 +1,38 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Comments list</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Comment text</th>
+                <th>Creationdate</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for comment in comments %}
+            <tr>
+                <td><a href="{{ path('comments_show', { 'id': comment.id }) }}">{{ comment.id }}</a></td>
+                <td>{{ comment.commentText }}</td>
+                <td>{% if comment.creationDate %}{{ comment.creationDate|date('Y-m-d') }}{% endif %}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('comments_show', { 'id': comment.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('comments_edit', { 'id': comment.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+      
+    </ul>
+    {% endblock %}

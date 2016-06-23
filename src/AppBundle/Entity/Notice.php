@@ -73,6 +73,16 @@ class Notice
     
     
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Comments", mappedBy="notice")
+     */
+    private $comments;
+    
+    
+    public function __construct(){
+        $this->comments = new ArrayCollection();
+    }
+    
+    /**
      * Get id
      *
      * @return integer 
@@ -243,5 +253,38 @@ class Notice
     public function getCategory()
     {
         return $this->category;
+    }
+
+    /**
+     * Add comments
+     *
+     * @param \AppBundle\Entity\Comments $comment
+     * @return Notice
+     */
+    public function addComment(\AppBundle\Entity\Comments $comment)
+    {
+        $this->comments[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Remove comments
+     *
+     * @param \AppBundle\Entity\Comments $comment
+     */
+    public function removeComment(\AppBundle\Entity\Comments $comment)
+    {
+        $this->comments->removeElement($comment);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 }

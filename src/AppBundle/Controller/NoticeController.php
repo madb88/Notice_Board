@@ -10,6 +10,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use AppBundle\Entity\Notice;
 use AppBundle\Form\NoticeType;
 use AppBundle\Entity\Picture;
+use AppBundle\Entity\Comments;
+use AppBundle\Form\CommentsType;
 
 
 /**
@@ -50,7 +52,6 @@ class NoticeController extends Controller
         $notice = new Notice();
         $user = $this->getUser();
         $user->addNotice($notice);
-        
         
         $notice->setUser($user);
         $notice->setCreationDate(new \DateTime());

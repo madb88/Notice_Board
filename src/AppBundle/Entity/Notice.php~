@@ -66,10 +66,21 @@ class Notice
     private $picture;
     
     /**
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Category", mappedBy="notice")
+     * @var Notice 
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Category", inversedBy="notices")
      */
     private $category;
     
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="notice", cascade={"remove"})
+     */
+    private $comments;
+    
+    
+    public function __construct(){
+        $this->comments = new ArrayCollection();
+    }
     
     /**
      * Get id
@@ -219,5 +230,28 @@ class Notice
     public function getPicture()
     {
         return $this->picture;
+    }
+
+    /**
+     * Set category
+     *
+     * @param \AppBundle\Entity\Category $category
+     * @return Notice
+     */
+    public function setCategory(\AppBundle\Entity\Category $category = null)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return \AppBundle\Entity\Category 
+     */
+    public function getCategory()
+    {
+        return $this->category;
     }
 }

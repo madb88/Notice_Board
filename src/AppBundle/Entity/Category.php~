@@ -30,10 +30,10 @@ class Category
 
 
     /**
-     * @var Notice 
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Category", inversedBy="category")
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Notice", mappedBy="category")
      */
-    private $notice;
+    private $notices;
     
     /**
      * Get id
@@ -66,5 +66,28 @@ class Category
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set notice
+     *
+     * @param \AppBundle\Entity\Category $notice
+     * @return Category
+     */
+    public function setNotice(\AppBundle\Entity\Category $notice = null)
+    {
+        $this->notice = $notice;
+
+        return $this;
+    }
+
+    /**
+     * Get notice
+     *
+     * @return \AppBundle\Entity\Category 
+     */
+    public function getNotice()
+    {
+        return $this->notice;
     }
 }

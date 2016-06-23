@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Notice Board Application{% endblock %}</title>
     {% block stylesheets %}{% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
@@ -37,6 +37,7 @@
                                         <p>Description: {{notice.description}}</p>
                                         <p>Creation date: {{notice.creationDate|date('Y-m-d')}}</p>
                                         <p><a href="{{ path('notice_show', { 'id': notice.id }) }}" class="btn btn-primary btn-block" role="button">Show notice</a></p>
+                                        <p><a href="{{ path('comments_new', { 'noticeId': notice.id })}}" class="btn btn-primary btn-block" role="button">Comments</a></p>
                                     </div>
                                 </div>
                             </div>

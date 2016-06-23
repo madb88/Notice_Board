@@ -1,0 +1,36 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Comments</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ comment.id }}</td>
+            </tr>
+            <tr>
+                <th>Commenttext</th>
+                <td>{{ comment.commentText }}</td>
+            </tr>
+            <tr>
+                <th>Creationdate</th>
+                <td>{{ comment.creationDate|date('Y-m-d H:i:s') }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('comments') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('comments_edit', { 'id': comment.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

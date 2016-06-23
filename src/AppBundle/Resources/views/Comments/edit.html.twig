@@ -1,16 +1,16 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Notice creation</h1>
+    <h1>Comments edit</h1>
 
-    {{ form(form) }}
-    
+    {{ form(edit_form) }}
+
         <ul class="record_actions">
     <li>
-        <a href="{{ path('notice') }}">
+        <a href="{{ path('comments') }}">
             Back to the list
         </a>
-           
     </li>
+    <li>{{ form(delete_form) }}</li>
 </ul>
 {% endblock %}
