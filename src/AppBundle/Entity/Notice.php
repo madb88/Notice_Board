@@ -73,7 +73,7 @@ class Notice
     
     
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Comments", mappedBy="notice")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Comments", mappedBy="notice", cascade={"remove"})
      */
     private $comments;
     

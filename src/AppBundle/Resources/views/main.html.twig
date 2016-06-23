@@ -20,6 +20,7 @@
         <a href="#" class="btn btn-danger disabled" role="button" >Show notices by category</a>
 
         {% block body %}
+            
             <h2>Current Notice's</h2>
             <div class='container'>
                 <div class="row">                   
@@ -37,7 +38,7 @@
                                         <p>Description: {{notice.description}}</p>
                                         <p>Creation date: {{notice.creationDate|date('Y-m-d')}}</p>
                                         <p><a href="{{ path('notice_show', { 'id': notice.id }) }}" class="btn btn-primary btn-block" role="button">Show notice</a></p>
-                                        <p><a href="{{ path('comments_new', { 'noticeId': notice.id })}}" class="btn btn-primary btn-block" role="button">Comments</a></p>
+                                        <p><a href="{{ path('comments_new', { 'noticeId': notice.id })}}" class="btn btn-success btn-block" role="button">Add comment</a></p>
                                     </div>
                                 </div>
                             </div>

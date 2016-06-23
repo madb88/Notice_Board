@@ -44,7 +44,7 @@ class Comments
     private $user;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Notice", inversedBy="comments")
+     * @ORM\ManyToOne(targetEntity="Notice", inversedBy="comments", cascade={"remove"})
      */
     private $notice;
 

@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use AppBundle\Entity\Notice;
 use AppBundle\Form\NoticeType;
 use AppBundle\Entity\Picture;
@@ -62,7 +63,6 @@ class NoticeController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            /** @var \Symfony\Component\HttpFoundation\File\UploadedFile $img */
             $img = $form->get('picture')->getData();
             if ($img) {
             $fileName = md5(uniqid()).'.'.$img->guessExtension();
@@ -235,6 +235,7 @@ class NoticeController extends Controller
      *
      * @Route("/{id}", name="notice_delete")
      * @Method("DELETE")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function deleteAction(Request $request, $id)
     {
@@ -262,6 +263,7 @@ class NoticeController extends Controller
      * @param mixed $id The entity id
      *
      * @return \Symfony\Component\Form\Form The form
+     * @Security("has_role('ROLE_ADMIN')")
      */
     private function createDeleteForm($id)
     {
