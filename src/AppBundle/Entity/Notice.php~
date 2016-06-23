@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Notice
@@ -49,9 +50,27 @@ class Notice
      */
     private $creationDate;
 
+           
     
+     /**
+     * @var User 
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="notices")
+     */
+    private $user;
+    
+    
+    /**
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Picture")
+     * @ORM\JoinColumn(nullable = true)
+     */
     private $picture;
-        
+    
+    /**
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Category", mappedBy="notice")
+     */
+    private $category;
+    
+    
     /**
      * Get id
      *
@@ -131,6 +150,7 @@ class Notice
         return $this->expirationDate;
     }
 
+    
     /**
      * Set creationDate
      *
@@ -152,5 +172,52 @@ class Notice
     public function getCreationDate()
     {
         return $this->creationDate;
+    }
+    
+    
+    /**
+     * Set user
+     *
+     * @param \AppBundle\Entity\User $user
+     * @return user
+     */
+    public function setUser(\AppBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \AppBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Set picture
+     *
+     * @param \AppBundle\Entity\Picture $picture
+     * @return Notice
+     */
+    public function setPicture(\AppBundle\Entity\Picture $picture = null)
+    {
+        $this->picture = $picture;
+
+        return $this;
+    }
+
+    /**
+     * Get picture
+     *
+     * @return \AppBundle\Entity\Picture 
+     */
+    public function getPicture()
+    {
+        return $this->picture;
     }
 }

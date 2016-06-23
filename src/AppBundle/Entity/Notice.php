@@ -58,6 +58,20 @@ class Notice
      */
     private $user;
     
+    
+    /**
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Picture")
+     * @ORM\JoinColumn(nullable = true)
+     */
+    private $picture;
+    
+    /**
+     * @var Notice 
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Category", inversedBy="notices")
+     */
+    private $category;
+    
+    
     /**
      * Get id
      *
@@ -183,5 +197,51 @@ class Notice
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set picture
+     *
+     * @param \AppBundle\Entity\Picture $picture
+     * @return Notice
+     */
+    public function setPicture(\AppBundle\Entity\Picture $picture = null)
+    {
+        $this->picture = $picture;
+
+        return $this;
+    }
+
+    /**
+     * Get picture
+     *
+     * @return \AppBundle\Entity\Picture 
+     */
+    public function getPicture()
+    {
+        return $this->picture;
+    }
+
+    /**
+     * Set category
+     *
+     * @param \AppBundle\Entity\Category $category
+     * @return Notice
+     */
+    public function setCategory(\AppBundle\Entity\Category $category = null)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return \AppBundle\Entity\Category 
+     */
+    public function getCategory()
+    {
+        return $this->category;
     }
 }

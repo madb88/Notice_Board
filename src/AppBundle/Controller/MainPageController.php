@@ -17,6 +17,6 @@ class MainPageController extends Controller
      * @Template("AppBundle::main.html.twig");
      */
     public function showLandingPageAction(){
-        return [];
+        return ['notices' => $this->getDoctrine()->getRepository('AppBundle:Notice')->findAll()];
     }
 }

@@ -1,30 +1,43 @@
 {% extends '::base.html.twig' %}
 
-{% block body -%}
-    <h1>Notice</h1>
-
+{% block body %}
+    <h1>{{ notice.title }}</h1>
     <table class="record_properties">
         <tbody>
             <tr>
                 <th>Id</th>
-                <td>{{ entity.id }}</td>
+                <td>{{ notice.id }}</td>
             </tr>
             <tr>
                 <th>Title</th>
-                <td>{{ entity.title }}</td>
+                <td>{{ notice.title }}</td>
             </tr>
             <tr>
                 <th>Description</th>
-                <td>{{ entity.description }}</td>
+                <td>{{ notice.description }}</td>
             </tr>
             <tr>
                 <th>Expirationdate</th>
-                <td>{{ entity.expirationDate|date('Y-m-d H:i:s') }}</td>
+                <td>{{ notice.expirationDate|date('Y-m-d H:i:s') }}</td>
             </tr>
             <tr>
                 <th>Creationdate</th>
-                <td>{{ entity.creationDate|date('Y-m-d H:i:s') }}</td>
+                <td>{{ notice.creationDate|date('Y-m-d H:i:s') }}</td>
             </tr>
+            <tr>
+                <th>Created by</th>
+                <td>{{ notice.user }}</td>
+            </tr>
+            <tr>
+                <th>Category</th>
+                <td>{{ notice.category.name }}</td>
+            </tr>
+            {% if notice.picture is not null %}
+            <tr>
+                <th>Photo</th>
+                <td><img src="{{ asset('images/' ~ notice.picture.path) }}" alt="Symfony!" /></td>
+            </tr>
+            {% endif %}
         </tbody>
     </table>
 
@@ -35,7 +48,7 @@
         </a>
     </li>
     <li>
-        <a href="{{ path('notice_edit', { 'id': entity.id }) }}">
+        <a href="{{ path('notice_edit', { 'id': notice.id }) }}">
             Edit
         </a>
     </li>

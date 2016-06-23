@@ -9,6 +9,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use AppBundle\Entity\Notice;
 use AppBundle\Form\NoticeType;
+use AppBundle\Entity\Picture;
+
 
 /**
  * Notice controller.
@@ -29,10 +31,10 @@ class NoticeController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('AppBundle:Notice')->findAll();
+        $notices = $em->getRepository('AppBundle:Notice')->findAll();
 
         return array(
-            'entities' => $entities,
+            'notices' => $notices,
         );
         
     }
@@ -48,14 +50,32 @@ class NoticeController extends Controller
         $notice = new Notice();
         $user = $this->getUser();
         $user->addNotice($notice);
+        
+        
         $notice->setUser($user);
         $notice->setCreationDate(new \DateTime());
-         
+        $notice->setCategory();
+
         $form = $this->createCreateForm($notice);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            /** @var \Symfony\Component\HttpFoundation\File\UploadedFile $img */
+            $img = $form->get('picture')->getData();
+            if ($img) {
+            $fileName = md5(uniqid()).'.'.$img->guessExtension();
+            $movedImg = $img->move(
+                $this->container->getParameter('picture_directory'),
+                $fileName
+            );
+            $picture = new Picture();
+            $picture->setPath($movedImg->getFileName());
+            $notice->setPicture($picture);
+            $em->persist($picture);
+
+            }
+
             $em->persist($user);
             $em->persist($notice);
             $em->flush();
@@ -109,7 +129,7 @@ class NoticeController extends Controller
     /**
      * Finds and displays a Notice entity.
      *
-     * @Route("/{id}", name="notice_show")
+     * @Route("/show/{id}", name="notice_show")
      * @Method("GET")
      * @Template()
      */
@@ -144,7 +164,7 @@ class NoticeController extends Controller
 
         $notice = $em->getRepository('AppBundle:Notice')->find($id);
 
-        if (!$entity) {
+        if (!$notice) {
             throw $this->createNotFoundException('Unable to find Notice entity.');
         }
 
@@ -252,6 +272,12 @@ class NoticeController extends Controller
         ;
     }
     
-
+     /**
+     * @Route("/showMyNotices", name="showMyNotices")
+     * @Template("AppBundle:Notice:showUserNotice.html.twig")
+     */
+    public function showUserNoticesAction(){
+        return ['notices' => $this->getDoctrine()->getRepository('AppBundle:Notice')->findBy(['user'=>$this->getUser()])];
+    }
 
 }
