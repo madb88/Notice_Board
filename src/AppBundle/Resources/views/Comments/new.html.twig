@@ -1,6 +1,15 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Add Comment</h1>
+    <a href="{{ path('main')}}" class="btn btn-primary btn" role="button">Home</a>
+    <h1>Add Comment <span class="glyphicon glyphicon-comment"></span> </h1>
     {{ form(form) }}
+     <h3>Comments for this notice</h3>
+
+    {% for comment in notice.comments %}
+        <p><strong>Text:</strong> {{ comment.commentText }}</p>
+        <p><strong>Creation date:</strong> {{ comment.creationDate|date('Y-m-d') }}</p>
+        <p><strong>Created by:</strong> {{ comment.user }}</p>
+        <hr>
+    {% endfor %}
 {% endblock %}

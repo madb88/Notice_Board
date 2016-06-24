@@ -71,7 +71,7 @@ class CommentsController extends Controller
         }
 
         return array(
-            'notice'=>$notice,
+            'notice'=> $notice,
             'comment' => $comment,
             'form'   => $form->createView(),
         );

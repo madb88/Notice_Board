@@ -45,17 +45,17 @@
         <p><strong>Created by:</strong> {{ comment.user }}</p>
         <br />
     {% endfor %}
-    <ul class="record_actions">
-        <li>
-            <a href="{{ path('notice') }}">
-                Back to the list
-            </a>
-        </li>
-        <li>
-            <a href="{{ path('notice_edit', { 'id': notice.id }) }}">
-                Edit
-            </a>
-        </li>
-        <li>{{ form(delete_form) }}</li>
-    </ul>
+    <table class="table">
+        <tr>
+            <td><a href="{{ path('notice_edit', { 'id': notice.id }) }}" class="btn btn-primary btn" role="button">Edit notice</a></td>
+        </tr>
+        <tr>
+            <td class="warning">{{ form(delete_form) }}</td>
+
+        </tr>
+
+
+
+    </table>
+
 {% endblock %}

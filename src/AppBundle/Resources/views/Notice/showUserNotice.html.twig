@@ -1,9 +1,9 @@
 {% extends '::base.html.twig' %}
 
-{% block body -%}
+{% block body %}
     <h1>Notice list</h1>
 
-    <table class="records_list">
+    <table class="table table-hover">
         <thead>
             <tr>
                 <th>Id</th>
@@ -23,26 +23,10 @@
                 <td>{% if notice.expirationDate %}{{ notice.expirationDate|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{% if notice.creationDate %}{{ notice.creationDate|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>
-                <ul>
-                  
-                    <li>
-                        <a href="{{ path('notice_show', { 'id': notice.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('notice_edit', { 'id': notice.id }) }}">edit</a>
-                    </li>
-                </ul>
+               
+                 <a class="btn btn-primary btn-block" href="{{ path('notice_show', { 'id': notice.id }) }}" role="button">Show</a>
+                 <a class="btn btn-default btn-block" href="{{ path('notice_edit', { 'id': notice.id }) }}" role="button">Edit</a>
                 </td>
             </tr>
         {% endfor %}
-        </tbody>
-    </table>
-
-        <ul>
-        <li>
-            <a href="{{ path('notice_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
     {% endblock %}

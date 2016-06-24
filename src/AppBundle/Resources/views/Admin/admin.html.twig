@@ -1,0 +1,7 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <h1>Administrator Panel</h1>
+    <a href="{{ path('main')}}" class="btn btn-primary btn" role="button">Home</a>
+    <a href="{{ path('newCategory')}}" class="btn btn-success btn" role="button">Add Category</a>
+{% endblock %}
