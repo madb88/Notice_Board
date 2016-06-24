@@ -11,6 +11,7 @@ use AppBundle\Entity\Notice;
 use AppBundle\Entity\Category;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 
 class MainPageController extends Controller
@@ -19,9 +20,31 @@ class MainPageController extends Controller
      * @Route("/", name="main");
      * @Template("AppBundle::main.html.twig");
      */
-    public function showLandingPageAction(){
-        return ['notices' => $this->getDoctrine()->getRepository('AppBundle:Notice')->findAll()];
-    }
+//    public function showLandingPageAction(){
+//        
+//        return ['notices' => $this->getDoctrine()->getRepository('AppBundle:Notice')->findAll()];
+//    }
+    
+    /**
+     * @Route("/", name="main");
+     * @Template("AppBundle::main2.html.twig");
+     */
+    public function listAction(Request $request)
+{
+    $em    = $this->get('doctrine.orm.entity_manager');
+    $dql   = "SELECT n FROM AppBundle:Notice n";
+    $query = $em->createQuery($dql);
+
+    $paginator  = $this->get('knp_paginator');
+    $pagination = $paginator->paginate(
+        $query, /* query NOT result */
+        $request->query->getInt('page', 1)/*page number*/,
+        3/*limit per page*/
+    );
+
+    // parameters to template
+    return $this->render('AppBundle::main2.html.twig', array('pagination' => $pagination));
+}
     
     /**
      * @Route("/admin", name="admin");

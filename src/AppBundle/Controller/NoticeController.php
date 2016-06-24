@@ -13,6 +13,8 @@ use AppBundle\Form\NoticeType;
 use AppBundle\Entity\Picture;
 use AppBundle\Entity\Comments;
 use AppBundle\Form\CommentsType;
+use Doctrine\ORM\Tools\Pagination\Paginator;
+
 
 
 /**
