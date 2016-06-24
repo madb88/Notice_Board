@@ -8,12 +8,10 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="{{ asset('/stylesheet/style.css') }}" type="text/css"/>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
 </head>
 <body>
     <div class="container">
         <h1>Notice Board Application</h1>
-
         <a href="{{ path('fos_user_security_login')}}" class="btn btn-primary btn" role="button">Login</a>
         <a href="{{ path('fos_user_registration_register')}}" class="btn btn-primary btn" role="button">Registration</a>
         <a href="{{ path('notice_new')}}" class="btn btn-success btn" role="button">Add notice</a>
@@ -22,10 +20,15 @@
             <a href="{{ path('admin')}}" class="btn btn-danger" role="button" >Admin Panel</a>
         {% endif %}
         {% block body %}
-            {#  <div class="count">
-                    {{ pagination.getTotalItemCount }}
-                </div>#}
             <h2>Current Notice's</h2>
+            <p class="text-left">Sort by:</p>
+            <table class="table">
+                
+                <th>{{ knp_pagination_sortable(pagination, 'Id', 'n.id') }}</th>
+                    <th{% if pagination.isSorted('n.title') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Title', 'n.title') }}</th>
+                    <th>{{ knp_pagination_sortable(pagination, 'Created', ['n.creationDate'])}}</th>
+                   
+            </table>
             <div class='container'>
                 <div class="row">                   
                     <div class="col-sm-6 col-md-12">
@@ -51,14 +54,12 @@
                         {% else %}
                             <p>No notices found<p>
                             {% endfor %}
-
                             {# display navigation #}
                         <footer class="footer">
                             <div class="container">
-                                  
                                 <p class="text-muted">{{ knp_pagination_render(pagination) }}</p>
-                                 
-                            </div>
+                                <p>made by Jakub Kamiński</p>
+                            </div>    
                         </footer>
                     </div>
                 </div>

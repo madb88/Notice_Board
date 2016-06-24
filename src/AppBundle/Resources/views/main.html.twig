@@ -7,21 +7,18 @@
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
 </head>
 <body>
     <div class="container">
         <h1>Notice Board Application</h1>
-
         <a href="{{ path('fos_user_security_login')}}" class="btn btn-primary btn" role="button">Login</a>
         <a href="{{ path('fos_user_registration_register')}}" class="btn btn-primary btn" role="button">Registration</a>
         <a href="{{ path('notice_new')}}" class="btn btn-success btn" role="button">Add notice</a>
         <a href="{{ path('showMyNotices')}}" class="btn btn-success btn" role="button">Show all your notices</a>
         {% if is_granted('ROLE_ADMIN') %}
-        <a href="{{ path('admin')}}" class="btn btn-danger" role="button" >Admin Panel</a>
+            <a href="{{ path('admin')}}" class="btn btn-danger" role="button" >Admin Panel</a>
         {% endif %}
         {% block body %}
-
             <h2>Current Notice's</h2>
             <div class='container'>
                 <div class="row">                   
